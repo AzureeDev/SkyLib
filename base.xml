@@ -1,0 +1,19 @@
+<mod name="SkyLib" global_key="SkyLib" color="Color(0.63, 0.58, 0.95)" priority="999">
+    <Classes directory="classes">
+        <class file="Utils/SkyHook.lua"/>
+        <class file="SkyLib.lua"/>
+        <class file="SkyLibTweakData.lua"/>
+        <class file="SkyLibSound.lua"/>
+        <class file="SkyLibNetwork.lua"/>
+        <class file="Gamemodes/Sora/CODZ/CODZ.lua"/>
+    </Classes>
+
+    <Hooks directory="hooks">
+        <hook file="gamesetup.lua" source_file="lib/setups/gamesetup"/>
+    </Hooks>
+
+    <AddFiles directory="assets">
+        <texture path="ui/bloodtrail"/>
+        <texture path="ui/bloodtrail_other"/>
+    </AddFiles>
+</mod>
