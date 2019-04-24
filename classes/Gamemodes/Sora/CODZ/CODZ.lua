@@ -5,6 +5,11 @@ function SkyLib.CODZ:init(custom_rules)
     self._starting_money = custom_rules and custom_rules.mod_start_money or 500
     self._pregame_music = custom_rules and custom_rules.mod_pregame_music or nil
     self._gameover_music = custom_rules and custom_rules.mod_gameover_music or nil
+    self._victory_music = custom_rules and custom_rules.mod_victory_music or nil
+    self._round_start_musics = custom_rules and custom_rules.mod_round_start_musics or {  }
+    self._round_end_musics = custom_rules and custom_rules.mod_round_end_musics or {  }
+    self._special_round_start_musics = custom_rules and custom_rules.mod_special_round_start_musics or {  }
+    self._special_round_end_musics = custom_rules and custom_rules.mod_special_round_end_musics or {  }
 
     self._players = {
         [1] = {
@@ -109,12 +114,12 @@ function SkyLib.CODZ:_init_hooks()
     local mod_path = SkyLib.ModPath
 
     self._hooks = {
-        "classes/Gamemodes/Sora/CODZ/CODZ_ElementSpawnEnemyDummy",
-        "classes/Gamemodes/Sora/CODZ/CODZ_HUDManager",
-        "classes/Gamemodes/Sora/CODZ/CODZ_HUDManagerPD2",
-        "classes/Gamemodes/Sora/CODZ/CODZ_HUDMissionBriefing",
-        "classes/Gamemodes/Sora/CODZ/CODZ_PlayerManager",
-        "classes/Gamemodes/Sora/CODZ/CODZ_CopDamage",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_ElementSpawnEnemyDummy",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_HUDManager",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_HUDManagerPD2",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_HUDMissionBriefing",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_PlayerManager",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_CopDamage",
     }
 
     for _, hook in pairs(self._hooks) do
@@ -210,6 +215,18 @@ function SkyLib.CODZ:_update_hud_element()
         
         player_panel:child("player_points_1"):set_text(tostring(self._players[1].codz_points))
     end
+end
+
+function SkyLib.CODZ:_increase_wave()
+    self._level.wave.current = self._level.wave.current + 1
+end
+
+function SkyLib.CODZ:_get_current_wave()
+    return self._level.wave.current
+end
+
+function SkyLib.CODZ:_set_special_wave(status)
+    self._level.wave.is_special_wave = status
 end
 
 function SkyLib.CODZ:_create_new_weapon(data)

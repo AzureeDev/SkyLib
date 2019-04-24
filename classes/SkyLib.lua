@@ -1,4 +1,5 @@
 SkyLib = SkyLib or class()
+SkyLib.managers = {}
 
 function SkyLib:init()
     self._dev = true
@@ -7,16 +8,18 @@ function SkyLib:init()
     self._project_key = nil
 
     self._delayed_calls = {}
+
     self:log("SkyLib is here!")
 end
 
-function SkyLib:init_by_gamemode(mode)
+function SkyLib:init_by_gamemode(mode, rules)
+    self:log("Initializing Gamemode", mode)
     self._tweak_data = SkyLibTweakData:new()
 
     for gamemode, class in pairs(self._tweak_data.gamemodes) do
         if mode == gamemode then
             self._gamemode = class
-            class:init()
+            class:init(rules)
             break
         end
     end

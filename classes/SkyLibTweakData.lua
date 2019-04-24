@@ -2,7 +2,8 @@ SkyLibTweakData = SkyLibTweakData or class()
 
 function SkyLibTweakData:init()
     self.gamemodes = {
-        codzm = SkyLib.CODZ
+        codzm = SkyLib.CODZ,
+        survival = SkyLib.Survival
     }
 end
 

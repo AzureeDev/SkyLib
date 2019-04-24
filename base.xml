@@ -1,11 +1,20 @@
 <mod name="SkyLib" global_key="SkyLib" color="Color(0.63, 0.58, 0.95)" priority="999">
+
+    <AssetUpdates id="23809" version="1.0.0" provider="modworkshop" use_local_dir="true" use_local_path="true"/>
+
     <Classes directory="classes">
         <class file="Utils/SkyHook.lua"/>
+        <class file="Utils/Table.lua"/>
         <class file="SkyLib.lua"/>
         <class file="SkyLibTweakData.lua"/>
         <class file="SkyLibSound.lua"/>
         <class file="SkyLibNetwork.lua"/>
         <class file="Gamemodes/Sora/CODZ/CODZ.lua"/>
+        <class file="Gamemodes/Sora/Survival/Survival.lua"/>
+        <class file="Gamemodes/Sora/Survival/Survival_GameManager.lua"/>
+        <class file="Gamemodes/Sora/Survival/Survival_BuyMenu.lua"/>
+        <class file="Gamemodes/Sora/Survival/Survival_WeaponHelper.lua"/>
+        <class file="Gamemodes/Sora/Survival/Survival_Profile.lua"/>
     </Classes>
 
     <Hooks directory="hooks">
@@ -15,5 +24,9 @@
     <AddFiles directory="assets">
         <texture path="ui/bloodtrail"/>
         <texture path="ui/bloodtrail_other"/>
+        <texture path="ui/survival/stat_bar_empty"/>
+        <texture path="ui/survival/stat_bar_fill"/>
+        <font load="true" path="fonts/escom_outline"/>
+        <texture path="fonts/escom_outline"/>
     </AddFiles>
 </mod>
