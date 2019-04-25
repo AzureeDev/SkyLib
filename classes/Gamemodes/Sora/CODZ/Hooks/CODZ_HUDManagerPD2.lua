@@ -43,7 +43,7 @@ function HUDCODZ:_wave_change(wave_nb)
 end
 
 function HUDCODZ:_wave_change_anim(new_wave)
-    local function switch_anim(o)
+    local function switch_anim(o)      
         o:set_color(Color(1, 1, 1, 1))
 
         over(0.5, function (p)

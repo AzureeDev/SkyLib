@@ -190,6 +190,7 @@ function BuyMenu:_init_game_info()
             font = Font,
             w = 120,
             size = 20,
+            visible = tonumber(player_info.steam_id) > 0 and true or false,
             foreground = Color(0, 1, 0),
             text_vertical = "center"
         })
@@ -365,7 +366,7 @@ function BuyMenu:_init_weapon_list()
                         on_callback = ClassClbk(self, "_on_weapon_info_asked", wpn_data)
                     })
 
-                    local missing_dlc = wpn_tweak.global_value and not managers.dlc:is_dlc_unlocked(wpn_tweak.global_value)
+                    local missing_dlc = wpn_tweak.global_value and not managers.dlc:is_dlc_unlocked(wpn_tweak.global_value) and tweak_data.lootdrop.global_values[wpn_tweak.global_value].dlc
                     local sale_tbl = SkyLib.Survival._sales
                     local on_sale = false
 
@@ -944,7 +945,7 @@ function BuyMenu:_weapon_bought_callback(weapon_id)
     local tweak = tweak_data.weapon[weapon_id]
     local price = SkyLib.Survival:_get_weapon_price(weapon_id, tweak)
 
-    if tweak.global_value and not managers.dlc:is_dlc_unlocked(tweak.global_value) then
+    if tweak.global_value and not managers.dlc:is_dlc_unlocked(tweak.global_value) and tweak_data.lootdrop.global_values[tweak.global_value].dlc then
         return false
     end
 
@@ -967,7 +968,7 @@ function BuyMenu:_on_category_changed(new_cat)
 end
 
 function BuyMenu:_on_weapon_info_asked(weapon_id)
-    if tweak_data.weapon[weapon_id].global_value and not managers.dlc:is_dlc_unlocked(tweak_data.weapon[weapon_id].global_value) then
+    if tweak_data.weapon[weapon_id].global_value and not managers.dlc:is_dlc_unlocked(tweak_data.weapon[weapon_id].global_value) and tweak_data.lootdrop.global_values[tweak_data.weapon[weapon_id].global_value].dlc then
         return false
     end
 
