@@ -123,6 +123,7 @@ function SkyLib.CODZ:_init_hooks()
 
         "classes/Gamemodes/Sora/CODZ/Hooks/Interactions/ZMMoneyExt",
 
+        "classes/Gamemodes/Sora/CODZ/Editor/EditorWave",
     }
 
     for _, hook in pairs(self._hooks) do
@@ -145,6 +146,14 @@ function SkyLib.CODZ:_update_total_score(peer_id, add)
     end
 
     self._players[peer_id].codz_score = self._players[peer_id].codz_score + add
+end
+
+function SkyLib.CODZ:_increase_wave_kills()
+    self._level.zombies.killed = self._level.zombies.killed + 1
+end
+
+function SkyLib.CODZ:_reset_wave_kills()
+    self._level.zombies.killed = 0
 end
 
 function SkyLib.CODZ:_get_own_money()
@@ -279,4 +288,12 @@ function SkyLib.CODZ:_create_new_weapon(data)
         custom_ammo_clips_max = data.custom_ammo_clips_max or nil,
         custom_animation = data.custom_animation or nil 
     }
+end
+
+function SkyLib.CODZ:_respawn_players()
+    for i = 1, 4, 1 do
+        if managers.trade:is_peer_in_custody(i) then
+            IngameWaitingForRespawnState.request_player_spawn(i)
+        end
+    end
 end

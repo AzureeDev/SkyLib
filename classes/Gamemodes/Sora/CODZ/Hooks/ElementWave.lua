@@ -21,8 +21,19 @@ function ElementWave:on_executed(instigator)
         return
     end
 
+    if self._values.increase_kill then
+        SkyLib.CODZ:_increase_wave_kills()
+        return
+    end
+
+    if SkyLib.CODZ:_get_current_wave() > 0 then
+        managers.player:add_grenade_amount(2, true)
+    end
+
     SkyLib.CODZ:_increase_wave()
     managers.hud._hud_codz:_wave_change_anim(SkyLib.CODZ:_get_current_wave())
+    SkyLib.CODZ:_reset_wave_kills()
+    SkyLib.CODZ:_respawn_players()
 
     ElementWave.super.on_executed(self, instigator)
 end
