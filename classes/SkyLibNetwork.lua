@@ -69,7 +69,7 @@ function SkyLib.Network:_init_survival_network()
     end)
 end
 
-function SkyLib.Network:_init_codz_network()--[[
+function SkyLib.Network:_init_codz_network()
     Hooks:Add("NetworkReceivedData", "NetworkReceivedData_SkyLibNetwork", function(sender, id, data)
         if id == "UpdPts" then
             local tbl_data = LuaNetworking:StringToTable(data)
@@ -83,5 +83,5 @@ function SkyLib.Network:_init_codz_network()--[[
 
             SkyLib.CODZ:_update_total_score(sender, tonumber(tbl_data.pg))
         end
-    end)--]]
+    end)
 end

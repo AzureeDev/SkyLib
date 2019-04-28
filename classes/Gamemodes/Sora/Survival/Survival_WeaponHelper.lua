@@ -83,3 +83,36 @@ function SkyLib.Survival.WeaponHelper:_change_stats_of(weapon_id, tbl_new_stats)
         end
     end
 end
+
+function SkyLib.Survival.WeaponHelper:_add_mod_to_weapon(equipped_unit, part_id)
+    local factory_id = equipped_unit:base()._factory_id
+    local weapon_id = managers.weapon_factory:get_weapon_id_by_factory_id(factory_id)
+    local blueprint = equipped_unit:base()._blueprint
+
+    if not self:_weapon_has_part(weapon_id, part_id) then
+        SkyLib:log("[SkyLib.Survival.WeaponHelper:_add_mod_to_weapon] Error! Part <".. tostring(part_id) .."> do not exist for the weapon <".. tostring(weapon_id) .."> (".. tostring(factory_id) .. ")")
+        return blueprint
+    end
+
+    table.insert(blueprint, part_id)
+
+    local new_blueprint = managers.weapon_factory:get_assembled_blueprint(factory_id, blueprint)
+
+    return new_blueprint
+end
+
+function SkyLib.Survival.WeaponHelper:_current_equipped_weapon
+
+function SkyLib.Survival.WeaponHelper:_weapon_has_part(weapon_id, part_id)
+    local uses_parts = managers.weapon_factory:get_parts_from_weapon_id(weapon_id)
+
+    for type, parts in pairs(uses_parts) do
+        for _, part in ipairs(parts) do
+            if part == part_id then
+                return true
+            end
+        end
+    end
+
+    return false
+end

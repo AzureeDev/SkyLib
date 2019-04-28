@@ -114,12 +114,15 @@ function SkyLib.CODZ:_init_hooks()
     local mod_path = SkyLib.ModPath
 
     self._hooks = {
-        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_ElementSpawnEnemyDummy",
-        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_HUDManager",
-        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_HUDManagerPD2",
-        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_HUDMissionBriefing",
-        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_PlayerManager",
-        "classes/Gamemodes/Sora/CODZ/Hooks/CODZ_CopDamage",
+        "classes/Gamemodes/Sora/CODZ/Hooks/ElementSpawnEnemyDummy",
+        "classes/Gamemodes/Sora/CODZ/Hooks/HUDManager",
+        "classes/Gamemodes/Sora/CODZ/Hooks/HUDManagerPD2",
+        "classes/Gamemodes/Sora/CODZ/Hooks/HUDMissionBriefing",
+        "classes/Gamemodes/Sora/CODZ/Hooks/PlayerManager",
+        "classes/Gamemodes/Sora/CODZ/Hooks/CopDamage",
+
+        "classes/Gamemodes/Sora/CODZ/Hooks/Interactions/ZMMoneyExt",
+
     }
 
     for _, hook in pairs(self._hooks) do
@@ -163,6 +166,10 @@ function SkyLib.CODZ:_money_change(amount, peer_id)
 
     local is_positive = amount > 0
 
+    if is_positive then
+        self:_update_total_score(peer_id, amount)
+    end
+
     self:_update_hud_element()
 end
 
@@ -196,10 +203,10 @@ function SkyLib.CODZ:_update_hud_element()
                     end)
                 end)
 
-                player_panel:child("player_points_" .. player_id):set_text(tostring(self._players[peer:id()].codz_points))
+                player_panel:child("player_points_" .. peer:id()):set_text(tostring(self._players[peer:id()].codz_points))
 
                 if not me then
-                    player_panel:child("player_bg_points_" .. player_id):set_image("ui/bloodtrail_other")
+                    player_panel:child("player_bg_points_" .. peer:id()):set_image("ui/bloodtrail_other")
                 end
             end
         end

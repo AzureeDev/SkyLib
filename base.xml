@@ -26,6 +26,13 @@
         <texture path="ui/bloodtrail_other"/>
         <texture path="ui/survival/stat_bar_empty"/>
         <texture path="ui/survival/stat_bar_fill"/>
+        <texture path="ui/survival/menu_cat_ar"/>
+        <texture path="ui/survival/menu_cat_legend"/>
+        <texture path="ui/survival/menu_cat_lmg"/>
+        <texture path="ui/survival/menu_cat_smg"/>
+        <texture path="ui/survival/menu_cat_sg"/>
+        <texture path="ui/survival/menu_cat_pistol"/>
+        <texture path="ui/survival/menu_cat_snp"/>
         <font load="true" path="fonts/escom_outline"/>
         <texture path="fonts/escom_outline"/>
     </AddFiles>
